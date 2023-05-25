@@ -31,6 +31,5 @@ def embeddedUserResponse(user) -> dict:
         "photo": user["photo"]
     }
 
-
 def userListEntity(users) -> list:
     return [userEntity(user) for user in users]

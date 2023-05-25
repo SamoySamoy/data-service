@@ -29,10 +29,6 @@ def get_config():
     return Settings()
 
 
-class NotVerified(Exception):
-    pass
-
-
 class UserNotFound(Exception):
     pass
 
@@ -42,7 +38,6 @@ def require_user(Authorize: AuthJWT = Depends()):
         Authorize.jwt_required()
         user_id = Authorize.get_jwt_subject()
         user = userEntity(User.find_one({"_id": ObjectId(str(user_id))}))
-
         if not user:
             raise UserNotFound("User no longer exist")
     except Exception as e:
@@ -56,13 +51,11 @@ def require_user(Authorize: AuthJWT = Depends()):
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED, detail="User no longer exist"
             )
-        if error == "NotVerified":
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Please verify your account",
-            )
+
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token is invalid or has expired",
         )
+        
+        
     return user_id
