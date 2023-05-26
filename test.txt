@@ -1,0 +1,14 @@
+# register account
+{
+  "name": "test",
+  "email": "test@gmail.com",
+  "photo": "test.png",
+  "role": "test",
+  "created_at": "2023-05-26T02:22:13.497Z",
+  "updated_at": "2023-05-26T02:22:13.497Z",
+  "password": "test1234",
+  "passwordConfirm": "test1234"
+}
+
+
+

@@ -19,7 +19,6 @@ class UserBaseSchema(BaseModel):
 class CreateUserSchema(UserBaseSchema):
     password: constr(min_length=8)
     passwordConfirm: str
-    verified: bool = True
 
 
 class LoginUserSchema(BaseModel):
@@ -44,3 +43,26 @@ class ObjectIdField(str):
     @classmethod
     def __modify_schema__(cls, field_schema):
         field_schema.update(type="string", format="ObjectId")
+
+
+class HolidayBaseSchema(BaseModel):
+    name: str
+    date: datetime
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+    class Config:
+        orm_mode = True
+        
+
+class HolidayResponseSchema(HolidayBaseSchema):
+    id: str
+
+
+class HolidayResponse(BaseModel):
+    status: str
+    holiday: HolidayResponseSchema
+
+
+class FilteredHolidayResponse(HolidayBaseSchema):
+    id: str        

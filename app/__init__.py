@@ -1,1 +1,1 @@
-# treat app folder as package
+# treat app folder as a package

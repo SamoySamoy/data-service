@@ -7,4 +7,6 @@ print("Connecting to MongoDB...")
 
 db = client[settings.MONGO_INITDB_DATABASE]
 User = db.users
+Holiday = db.holidays
 User.create_index([("email", pymongo.ASCENDING)], unique=True)
+Holiday.create_index([("date", pymongo.ASCENDING)], unique=True)
