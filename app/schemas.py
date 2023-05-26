@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 from typing import List, Optional
 from pydantic import BaseModel, EmailStr, constr, validator
 from bson.objectid import ObjectId
@@ -47,13 +47,13 @@ class ObjectIdField(str):
 
 class HolidayBaseSchema(BaseModel):
     name: str
-    date: datetime
+    date: str
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 
     class Config:
         orm_mode = True
-        
+
 
 class HolidayResponseSchema(HolidayBaseSchema):
     id: str
@@ -65,4 +65,4 @@ class HolidayResponse(BaseModel):
 
 
 class FilteredHolidayResponse(HolidayBaseSchema):
-    id: str        
+    id: str
