@@ -9,3 +9,6 @@ def hash_password(password: str):
 
 def verify_password(password: str, hashed_password: str):
     return pwd_context.verify(password, hashed_password)
+
+def format_date(date_obj):
+    return date_obj.strftime("%d/%m/%y")
