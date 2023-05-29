@@ -3,8 +3,7 @@ import json
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 import asyncio
-from concurrent.futures import ThreadPoolExecutor
-from kafka import KafkaProducer
+from typing import Dict
 
 url = "https://finfo-iboard.ssi.com.vn/graphql"
 
