@@ -43,3 +43,5 @@ uvicorn==0.20.0
 watchfiles==0.18.1
 websockets==10.4
 aiohttp==3.8.4
+requests==2.31.0
+bs4==0.0.1
