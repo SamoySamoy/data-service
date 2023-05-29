@@ -71,7 +71,7 @@ class FilteredHolidayResponse(HolidayBaseSchema):
 class StockBaseSchema(BaseModel):
     name: str
     company_info: str
-    shareholders: List[dict] = []
+    shareholders: list[dict] = []
     prices: list[dict] = []
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
@@ -81,7 +81,7 @@ class StockBaseSchema(BaseModel):
 
 
 class StockCrawlSchema(StockBaseSchema):
-    name: str
+    pass
 
 
 class StockResponse(BaseModel):

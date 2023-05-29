@@ -19,7 +19,7 @@ router = APIRouter()
 
 # user get specific stock data
 @router.get("/{stock}")
-def get_stock(stock: str, user_id: str = Depends(require_user)):
+def get_stock(stock: str):
     pipeline = [
         {"$match": {"name": stock}},
     ]
@@ -38,9 +38,8 @@ def get_stock(stock: str, user_id: str = Depends(require_user)):
 
 # create stock data (crawl from iboard)
 @router.post("/{stock}")
-def crawl_stock(
-    stock: str, payload: schemas.StockCrawlSchema, user_id: str = Depends(require_user)
-):
+def crawl_stock(stock: str, payload: schemas.StockCrawlSchema):
+    payload.name = stock
     payload.company_info = get_stock_company_profile(stock)
     payload.shareholders = get_stock_shareholders(stock)
     payload.prices = get_stock_prices(stock)

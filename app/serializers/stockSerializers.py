@@ -3,8 +3,8 @@ def stockEntity(stock) -> dict:
         "id": str(stock["_id"]),
         "name": stock["name"],
         "company_info": stock["company_info"],
-        "prices": stock["prices"],
         "shareholders": stock["shareholders"],
+        "prices": stock["prices"],
         "created_at": stock["created_at"],
         "updated_at": stock["updated_at"]
     }
