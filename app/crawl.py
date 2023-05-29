@@ -52,6 +52,7 @@ def get_stock_shareholders(stock: str):
     return results
 
 
+
 # fetch stock prices (50 latest)
 def get_stock_prices(stock: str):
     current_date = datetime.now().strftime("%d/%m/%Y")
@@ -81,6 +82,7 @@ def get_stock_prices(stock: str):
     results = response["data"]["stockPrice"]["dataList"]
     return results
 
+print(get_stock_prices("ACB"))
 # get all data of specific stock
 def get_stock_data(stock: str):
     pass
