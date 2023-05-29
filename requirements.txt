@@ -45,3 +45,4 @@ websockets==10.4
 aiohttp==3.8.4
 requests==2.31.0
 bs4==0.0.1
+kafka-python==2.0.2
