@@ -27,3 +27,6 @@ async def execute_crawl_functions():
         producer.send('crawl_results', value=result)
 
 router.get("/stock")
+async def crawl():
+    await execute_crawl_functions()
+    return {"message": "Fetching data..." }
