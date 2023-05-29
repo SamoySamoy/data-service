@@ -17,6 +17,8 @@ def holidayResponseEntity(holiday) -> dict:
     }
 
 
+
+
 def embeddedHolidayResponse(holiday) -> dict:
     return {
         "id": str(holiday["_id"]),

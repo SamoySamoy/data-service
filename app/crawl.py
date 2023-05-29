@@ -2,6 +2,9 @@ import requests
 import json
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
+from kafka import KafkaProducer
 
 url = "https://finfo-iboard.ssi.com.vn/graphql"
 
@@ -26,6 +29,7 @@ def get_stock_company_profile(stock: str):
     results = response["data"]["companyProfile"]["companyprofile"]
     soup = BeautifulSoup(results, "html.parser")
     return soup.get_text()
+    
 
 
 # fetch stock's shareholders (50 biggest)
@@ -77,6 +81,12 @@ def get_stock_prices(stock: str):
     response = requests.request("POST", url, headers=headers, data=payload).json()
     results = response["data"]["stockPrice"]["dataList"]
     return results
+
+# get all data of specific stock
+def get_stock_data(stock: str):
+    pass
+
+
 
 
 

@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.routers import auth, user, holiday
+from app.routers import auth, user, holiday, stock
 
 app = FastAPI()
 
@@ -21,6 +21,7 @@ app.add_middleware(
 app.include_router(auth.router, tags=['Auth'], prefix='/api/auth')
 app.include_router(user.router, tags=['Users'], prefix='/api/users')
 app.include_router(holiday.router, tags=['Holidays'], prefix='/api/holidays')
+app.include_router(stock.router, tags=['Stocks'], prefix='/api/stocks')
 
 @app.get("/api/checker")
 def root():
