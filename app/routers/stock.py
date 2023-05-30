@@ -42,9 +42,9 @@ def get_stock(stock: str):
 @router.post("/{stock}")
 async def crawl_stock(stock: str, payload: schemas.StockCrawlSchema):
     payload.name = stock
-    payload.company_info = get_stock_company_profile(stock)
-    payload.shareholders = get_stock_shareholders(stock)
-    payload.prices = get_stock_prices(stock)
+    payload.company_info = get_stock_company_profile.delay(stock).get()
+    payload.shareholders = get_stock_shareholders.delay(stock).get()
+    payload.prices = get_stock_prices.delay(stock).get()
     payload.created_at = datetime.utcnow()
     payload.updated_at = payload.created_at
     try:
