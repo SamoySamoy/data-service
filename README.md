@@ -4,4 +4,4 @@ Complete holiday api service and stock crawling function
 
 # 30/05/23
 
-Complete celery and redis
+Complete celery, redis and derivative service
