@@ -87,7 +87,7 @@ def get_stock_prices(stock: str):
     response = requests.request("POST", url, headers=headers, data=payload).json()
     results = response["data"]["stockPrice"]["dataList"]
     return results
-print(get_stock_prices("FPT"))
+
 # get all data of specific stock
 def get_stock_data(stock: str):
     pass
