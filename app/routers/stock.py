@@ -14,7 +14,7 @@ from app.crawl import (
     get_stock_prices,
 )
 from app.celery import celery_app
-
+from app.derivative import derivatives, get_third_thursdays, find_nearest_third_thursdays
 
 router = APIRouter()
 
@@ -60,10 +60,18 @@ async def crawl_stock(stock: str, payload: schemas.StockCrawlSchema):
             detail=f"Stock with code: '{payload.name}' already exists",
         )
 
+
 # delete all database:
 @router.delete("/all")
 def delete_all():
     result = Stock.delete_many({})
-    return ("Delete all success")
+    return "Delete all success"
 
 
+@router.get("/derivative/{date}")
+def get_derivative_code(d):
+    try:
+        results = derivatives(d)
+        return results
+    except:
+        return "Please type your date in correct format dd/mm/yyyy"
