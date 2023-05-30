@@ -38,7 +38,7 @@ def get_stock(stock: str):
     return result
 
 
-# create stock data (crawl from iboard)
+# create/update stock data (crawl from iboard)
 @router.post("/{stock}")
 async def crawl_stock(stock: str, payload: schemas.StockCrawlSchema):
     payload.name = stock
@@ -65,3 +65,5 @@ async def crawl_stock(stock: str, payload: schemas.StockCrawlSchema):
 def delete_all():
     result = Stock.delete_many({})
     return ("Delete all success")
+
+
