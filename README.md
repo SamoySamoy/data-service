@@ -1,1 +1,7 @@
-# 29/5/2023. Complete holiday api service and stock crawling function
+# 29/05/23
+
+Complete holiday api service and stock crawling function
+
+# 30/05/23
+
+Complete celery and redis
