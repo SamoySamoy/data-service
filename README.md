@@ -8,7 +8,8 @@ The Data Service API provides functionality for managing public holidays, stock 
 - Handle user's crud holiday data,return a list of public holidays and weekends (Saturday & Sunday) in the specified year.
 
 ### Stock Data
-- Get information about a stock with the given stock code, including company description, list of shareholders, history prices
+- Get information about a stock with the given stock code, including company description, list of shareholders, history prices.
+- Using celery and redis as message broker to optimize crawling tasks
 
 ### Derivative Codes
 - In Viet Nam, the derivative expiration falls on Thursday, the third week of the expiration month, which includes the current month, the next month, and the last month of the two most recent quarters
