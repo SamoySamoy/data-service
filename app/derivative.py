@@ -29,7 +29,7 @@ def find_nearest_third_thursdays(input_date):
             case[0],
             case[1],
             case[3],
-            case[4],
+            case[6],
         ]
 
     else:
