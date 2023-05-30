@@ -4,11 +4,16 @@ from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 import asyncio
 from typing import Dict
+from celery import shared_task
+from app.celery import celery_app
 
 url = "https://finfo-iboard.ssi.com.vn/graphql"
 
 
 # fetch the stock's company description
+
+    
+@celery_app.task
 def get_stock_company_profile(stock: str):
     payload = json.dumps(
         {
@@ -28,15 +33,15 @@ def get_stock_company_profile(stock: str):
     results = response["data"]["companyProfile"]["companyprofile"]
     soup = BeautifulSoup(results, "html.parser")
     return soup.get_text()
-    
 
 
 # fetch stock's shareholders (50 biggest)
+@celery_app.task
 def get_stock_shareholders(stock: str):
     payload = json.dumps(
         {
             "operationName": "shareholders",
-            "variables": {"symbol": stock, "size": 50, "offset": 1},
+            "variables": {"symbol": stock, "size": 1000, "offset": 1},
             "query": "query shareholders($symbol: String!, $size: Int, $offset: Int, $order: String, $orderBy: String, $type: String, $language: String) {\n  shareholders(\n    symbol: $symbol\n    size: $size\n    offset: $offset\n    order: $order\n    orderBy: $orderBy\n    type: $type\n    language: $language\n  )\n}\n",
         }
     )
@@ -54,17 +59,18 @@ def get_stock_shareholders(stock: str):
 
 
 # fetch stock prices (50 latest)
+@celery_app.task
 def get_stock_prices(stock: str):
     current_date = datetime.now().strftime("%d/%m/%Y")
-    start_date = (datetime.now() - timedelta(days=50)).strftime("%d/%m/%Y")
+    start_date = (datetime.now() - timedelta(days=365)).strftime("%d/%m/%Y")
 
     payload = json.dumps(
         {
             "operationName": "stockPrice",
             "variables": {
-                "symbol": "BCM",
+                "symbol": stock,
                 "offset": 1,
-                "size": 10,
+                "size": 100000,
                 "fromDate": start_date,
                 "toDate": current_date,
             },
@@ -81,8 +87,7 @@ def get_stock_prices(stock: str):
     response = requests.request("POST", url, headers=headers, data=payload).json()
     results = response["data"]["stockPrice"]["dataList"]
     return results
-
-print(get_stock_prices("ACB"))
+print(get_stock_prices("FPT"))
 # get all data of specific stock
 def get_stock_data(stock: str):
     pass

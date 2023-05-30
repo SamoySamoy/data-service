@@ -13,6 +13,8 @@ from app.crawl import (
     get_stock_shareholders,
     get_stock_prices,
 )
+from app.celery import celery_app
+
 
 router = APIRouter()
 
@@ -38,7 +40,7 @@ def get_stock(stock: str):
 
 # create stock data (crawl from iboard)
 @router.post("/{stock}")
-def crawl_stock(stock: str, payload: schemas.StockCrawlSchema):
+async def crawl_stock(stock: str, payload: schemas.StockCrawlSchema):
     payload.name = stock
     payload.company_info = get_stock_company_profile(stock)
     payload.shareholders = get_stock_shareholders(stock)
@@ -55,5 +57,11 @@ def crawl_stock(stock: str, payload: schemas.StockCrawlSchema):
     except DuplicateKeyError:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail=f"Stock with code: '{payload.stock}' already exists",
+            detail=f"Stock with code: '{payload.name}' already exists",
         )
+
+# delete all database:
+@router.delete("/all")
+def delete_all():
+    result = Stock.delete_many({})
+    return ("Delete all success")
