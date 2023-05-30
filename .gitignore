@@ -1,7 +1,7 @@
 __pycache__
 env/
 .env
-.kafka-guide
-.dump.rdb
-.test.txt
-.test.py
+/kafka-guide
+/dump.rdb
+/test.txt
+/test.py
