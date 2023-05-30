@@ -6,3 +6,9 @@ dev-down:
 
 start-server:
 	uvicorn app.main:app --reload
+
+start-celery:
+    celery -A app worker -l info
+
+
+
